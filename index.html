@@ -16,7 +16,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --ink: #1a1a18;
       --ink-muted: #6b6b65;
@@ -29,13 +28,12 @@
       --accent-light: #f4ede3;
       --tag-bg: #f0ede7;
     }
-
     html { scroll-behavior: smooth; }
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--surface);
       color: var(--ink);
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
@@ -43,10 +41,10 @@
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(249,247,243,0.95);
+      background: rgba(249,247,243,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 0.5px solid var(--border);
-      padding: 0 2rem;
+      padding: 0 5vw;
       display: flex; align-items: center; justify-content: space-between;
       height: 56px;
     }
@@ -63,39 +61,51 @@
     }
     .nav-links a:hover { color: var(--ink); }
 
-    /* HERO — single column, centred, max width for readability */
+    /* HERO */
     .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       padding-top: 56px;
-      background: var(--surface);
     }
-    .hero-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 5rem 2rem 5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+    .hero-left {
+      padding: 5rem 3rem 4rem 5vw;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 0.5px solid var(--border);
+    }
+    .hero-right {
+      padding: 4rem 5vw 4rem 3rem;
+      display: flex; flex-direction: column; justify-content: center;
+      background: linear-gradient(160deg, var(--surface) 60%, var(--accent-light) 100%);
     }
     .hero-label {
       font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent); font-weight: 500;
-      margin-bottom: 1.25rem;
+      color: var(--accent); margin-bottom: 1.5rem; font-weight: 500;
     }
     .hero-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 8vw, 6rem);
-      font-weight: 300; line-height: 1.0;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
       letter-spacing: -0.01em; color: var(--ink);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .hero-name em { font-style: italic; color: var(--accent); }
     .hero-tagline {
-      font-size: 1.05rem; color: var(--ink-muted);
-      line-height: 1.75; margin-bottom: 2rem;
-      max-width: 520px;
+      font-size: 1rem; color: var(--ink-muted);
+      max-width: 380px; line-height: 1.7;
+      margin-bottom: 2.5rem;
     }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--ink);
+      text-decoration: none; border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+      align-self: flex-start;
+    }
+    .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
     .hero-image-wrap {
-      width: 100%; margin-bottom: 2rem;
+      width: 100%; margin-bottom: 1.5rem;
       border-radius: 12px; overflow: hidden;
       border: 0.5px solid var(--border);
     }
@@ -103,41 +113,31 @@
       width: 100%; display: block;
       object-fit: contain;
     }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--ink);
-      text-decoration: none; border-bottom: 1px solid var(--ink);
-      padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
-      align-self: flex-start;
-      margin-bottom: 3rem;
-    }
-    .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
     .hero-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-weight: 400; font-style: italic;
-      color: var(--ink-muted); line-height: 1.65;
-      margin-bottom: 2rem;
-      padding-left: 1.25rem;
-      border-left: 2px solid var(--accent);
+      font-size: 1.1rem; font-weight: 400; font-style: italic;
+      color: var(--ink-muted); line-height: 1.6;
+      margin-bottom: 1.25rem;
     }
     .hero-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
       background: var(--border); border: 0.5px solid var(--border);
+      width: 100%;
     }
     .stat-cell {
-      background: var(--surface-card);
-      padding: 1.25rem 1rem; display: flex; flex-direction: column; gap: 4px;
+      background: var(--surface);
+      padding: 1.2rem 1.5rem; display: flex; flex-direction: column; gap: 4px;
     }
     .stat-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem; font-weight: 300; color: var(--ink); line-height: 1;
+      font-size: 2.4rem; font-weight: 300; color: var(--ink); line-height: 1;
     }
-    .stat-label { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.03em; line-height: 1.4; }
+    .stat-label { font-size: 12px; color: var(--ink-muted); letter-spacing: 0.04em; }
 
-    /* SECTIONS */
-    section { padding: 6rem 2rem; max-width: 860px; margin: 0 auto; }
-    section.full { max-width: 100%; padding: 6rem 5vw; }
+    /* SECTIONS — all share same horizontal padding as nav */
+    section {
+      padding: 6rem 5vw;
+    }
     .section-header {
       display: flex; align-items: baseline; gap: 1rem;
       margin-bottom: 3.5rem; padding-bottom: 1rem;
@@ -155,10 +155,9 @@
     }
 
     /* ABOUT */
-    #about { background: var(--surface-card); max-width: 100%; padding: 6rem 5vw; }
+    #about { background: var(--surface-card); }
     .about-grid {
-      display: grid; grid-template-columns: 1fr 2fr; gap: 4rem;
-      max-width: 860px;
+      display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; width: 100%;
     }
     .about-chapter {
       font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
@@ -166,10 +165,10 @@
     }
     .about-role {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-weight: 400; color: var(--ink);
-      line-height: 1.4; margin-bottom: 0.2rem;
+      font-size: 1.4rem; font-weight: 400; color: var(--ink);
+      line-height: 1.4; margin-bottom: 0.25rem;
     }
-    .about-co { font-size: 13px; color: var(--ink-muted); margin-bottom: 1.8rem; }
+    .about-co { font-size: 13px; color: var(--ink-muted); margin-bottom: 2rem; }
     .timeline-item { margin-bottom: 1.8rem; padding-left: 1rem; border-left: 1.5px solid var(--border-strong); }
     .timeline-item:last-child { margin-bottom: 0; }
     .about-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink); margin-bottom: 1.5rem; }
@@ -182,9 +181,9 @@
     }
 
     /* PROJECTS */
-    #projects { background: var(--surface); max-width: 100%; padding: 6rem 5vw; }
+    #projects { background: var(--surface); }
     .projects-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5px; background: var(--border); border: 0.5px solid var(--border);
     }
     .project-card {
@@ -221,11 +220,11 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .project-card-add:hover { border-color: var(--accent); background: var(--accent-light); }
-    .add-icon { font-size: 1.8rem; color: var(--ink-faint); }
+    .add-icon { font-size: 1.8rem; color: var(--ink-faint); line-height: 1; }
     .add-label { font-size: 13px; color: var(--ink-faint); text-align: center; }
 
     /* CONTACT */
-    #contact { background: var(--surface-card); max-width: 100%; padding: 6rem 5vw; }
+    #contact { background: var(--surface-card); }
     .contact-inner { max-width: 640px; }
     .contact-intro {
       font-family: 'Cormorant Garamond', serif;
@@ -245,18 +244,19 @@
 
     /* FOOTER */
     footer {
-      border-top: 0.5px solid var(--border); padding: 2rem 5vw;
+      border-top: 0.5px solid var(--border);
+      padding: 2rem 5vw;
       display: flex; align-items: center; justify-content: space-between;
-      font-size: 12px; color: var(--ink-faint); background: var(--surface);
+      font-size: 12px; color: var(--ink-faint);
     }
 
     /* RESPONSIVE */
-    @media (max-width: 600px) {
-      .hero-stats { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 4rem 5vw 2rem; border-right: none; border-bottom: 0.5px solid var(--border); }
+      .hero-right { padding: 2rem 5vw 3rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      nav { padding: 0 1rem; }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 11px; }
+      .nav-links { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -264,8 +264,8 @@
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54JS276X"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
+  <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">Shaivya V.</a>
     <ul class="nav-links">
@@ -275,19 +275,21 @@
     </ul>
   </nav>
 
-  <!-- HERO: single column, everything stacked -->
-  <div class="hero">
-    <div class="hero-inner">
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
       <p class="hero-label">Product Manager · Builder · Mom</p>
       <h1 class="hero-name">Shaivya<br/><em>Vashishtha</em></h1>
       <p class="hero-tagline">
         Product leader turned independent builder — figuring out what's next,
         one vibe-coded project at a time.
       </p>
+      <a href="#about" class="hero-cta">Brief intro &#8595;</a>
+    </div>
+    <div class="hero-right">
       <div class="hero-image-wrap">
         <img src="hero-image.png" alt="Shaivya — PM, builder, mom" class="hero-image" />
       </div>
-      <a href="#about" class="hero-cta">Brief intro &#8595;</a>
       <p class="hero-quote">
         "Worked across three continents — now building from my little one's play tent."
       </p>
@@ -310,7 +312,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ABOUT -->
   <section id="about">
@@ -338,10 +340,9 @@
       </div>
       <div class="about-right">
         <p class="about-body">
-          I'm a product leader with deep experience across <strong>financial services, compliance, and consumer experience</strong>.
+          I'm a Senior Product Manager with deep experience across <strong>financial services, compliance, and consumer experience</strong>.
           At Goldman Sachs I led new application flows and existing member experience for the business credit card at Marcus.
-          Later I moved into Compliance PM, designing the KYC journey, for all GS businesses, that keeps customers
-          safe and regulators happy.
+          Later I moved into Compliance PM, designing the KYC journey, for all GS businesses, that keeps customers safe and regulators happy.
         </p>
         <p class="about-body">
           Before Goldman Sachs, I helped scale an agri-tech startup in India, drove growth strategy at a fintech in Austin,
@@ -349,7 +350,7 @@
           the University of Texas at Austin and a B.Tech from IIT Delhi.
         </p>
         <p class="about-body">
-          Now I'm a mom to a wonderful little girl, and I'm using my spare time to finally do the thing I always said I'd do someday: <em>build stuff</em>. My current strategy? Build things I want for myself and hope others want them too. So far, the user research sample size is one 😉 — but I'm already plotting how to find my people and turn this into something real 💪
+          Now I'm a mom to a wonderful little girl, and I'm using my spare time to finally do the thing I always said I'd do someday: <em>build stuff</em>. My current strategy? Build things I want for myself and hope others want them too. So far, the user research sample size is one &#128521; — but I'm already plotting how to find my people and turn this into something real &#128170;
         </p>
         <p class="about-body">
           If you're curious about my work, want to collaborate, or just want to talk product — I'd love to hear from you.
@@ -386,7 +387,7 @@
         </div>
       </a>
       <a href="#" class="project-card"
-         onclick="dataLayer.push({event:'project_click', project_name:'Second Project'})">
+         onclick="dataLayer.push({event:'project_click', project_name:'TBD'})">
         <p class="project-tag">TBD</p>
         <h3 class="project-name">Coming Soon</h3>
         <p class="project-desc">Something's brewing — watch this space.</p>
@@ -413,13 +414,18 @@
         Open to conversations about product, AI, or whatever rabbit hole I've fallen into this week.
       </p>
       <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#afdcc7cec6d9d6ced9efdadbcad7cedc81cacbda" class="contact-link">&#9993; Email</a>
+        <a href="mailto:shaivyav@utexas.edu" class="contact-link">&#9993; Email</a>
         <a href="https://www.linkedin.com/in/shaivya-vashishtha/" target="_blank" class="contact-link">LinkedIn</a>
-        <a href="https://github.com/newtogit35" target="_blank" class="contact-link">GitHub</a>
+        <a href="https://github.com/Shaivyav16" target="_blank" class="contact-link">GitHub</a>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <span>&#169; 2025 Shaivya Vashishtha</span>
-    <span>Built with curiosity &amp; 
+    <span>Built with curiosity &amp; Claude</span>
+  </footer>
+
+</body>
+</html>
