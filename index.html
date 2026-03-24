@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shaivya Vashishtha</title>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-54JS276X');</script>
+  <!-- End Google Tag Manager -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --ink-muted: #6b6b65;
+      --ink-faint: #b0afa8;
+      --surface: #f9f7f3;
+      --surface-card: #ffffff;
+      --border: rgba(26,26,24,0.10);
+      --border-strong: rgba(26,26,24,0.18);
+      --accent: #c9773a;
+      --accent-light: #f4ede3;
+      --tag-bg: #f0ede7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,247,243,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 400; letter-spacing: 0.02em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO — single column, centred, max width for readability */
+    .hero {
+      padding-top: 56px;
+      background: var(--surface);
+    }
+    .hero-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 5rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .hero-label {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 300; line-height: 1.0;
+      letter-spacing: -0.01em; color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-tagline {
+      font-size: 1.05rem; color: var(--ink-muted);
+      line-height: 1.75; margin-bottom: 2rem;
+      max-width: 520px;
+    }
+    .hero-image-wrap {
+      width: 100%; margin-bottom: 2rem;
+      border-radius: 12px; overflow: hidden;
+      border: 0.5px solid var(--border);
+    }
+    .hero-image {
+      width: 100%; display: block;
+      object-fit: contain;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--ink);
+      text-decoration: none; border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+      align-self: flex-start;
+      margin-bottom: 3rem;
+    }
+    .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+    .hero-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 400; font-style: italic;
+      color: var(--ink-muted); line-height: 1.65;
+      margin-bottom: 2rem;
+      padding-left: 1.25rem;
+      border-left: 2px solid var(--accent);
+    }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border); border: 0.5px solid var(--border);
+    }
+    .stat-cell {
+      background: var(--surface-card);
+      padding: 1.25rem 1rem; display: flex; flex-direction: column; gap: 4px;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300; color: var(--ink); line-height: 1;
+    }
+    .stat-label { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.03em; line-height: 1.4; }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; max-width: 860px; margin: 0 auto; }
+    section.full { max-width: 100%; padding: 6rem 5vw; }
+    .section-header {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: 3.5rem; padding-bottom: 1rem;
+      border-bottom: 0.5px solid var(--border);
+      width: 100%;
+    }
+    .section-num {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300; color: var(--ink);
+    }
+
+    /* ABOUT */
+    #about { background: var(--surface-card); max-width: 100%; padding: 6rem 5vw; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 4rem;
+      max-width: 860px;
+    }
+    .about-chapter {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-faint); margin-bottom: 0.4rem; font-weight: 500;
+    }
+    .about-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 400; color: var(--ink);
+      line-height: 1.4; margin-bottom: 0.2rem;
+    }
+    .about-co { font-size: 13px; color: var(--ink-muted); margin-bottom: 1.8rem; }
+    .timeline-item { margin-bottom: 1.8rem; padding-left: 1rem; border-left: 1.5px solid var(--border-strong); }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .about-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink); margin-bottom: 1.5rem; }
+    .about-body strong { font-weight: 500; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+    .tag {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.04em;
+      background: var(--tag-bg); color: var(--ink-muted);
+      padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border);
+    }
+
+    /* PROJECTS */
+    #projects { background: var(--surface); max-width: 100%; padding: 6rem 5vw; }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px; background: var(--border); border: 0.5px solid var(--border);
+    }
+    .project-card {
+      background: var(--surface-card); padding: 2rem 2rem 1.6rem;
+      display: flex; flex-direction: column;
+      transition: background 0.2s; text-decoration: none; color: inherit;
+    }
+    .project-card:hover { background: var(--accent-light); }
+    .project-tag {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+    }
+    .project-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400; color: var(--ink);
+      line-height: 1.2; margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      font-size: 0.9rem; color: var(--ink-muted);
+      line-height: 1.65; flex: 1; margin-bottom: 1.5rem;
+    }
+    .project-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--ink-faint);
+      border-top: 0.5px solid var(--border); padding-top: 1rem;
+    }
+    .project-status { display: inline-flex; align-items: center; gap: 5px; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .project-card-add {
+      background: transparent; border: 1.5px dashed var(--border-strong);
+      padding: 2rem; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.75rem;
+      min-height: 200px; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .project-card-add:hover { border-color: var(--accent); background: var(--accent-light); }
+    .add-icon { font-size: 1.8rem; color: var(--ink-faint); }
+    .add-label { font-size: 13px; color: var(--ink-faint); text-align: center; }
+
+    /* CONTACT */
+    #contact { background: var(--surface-card); max-width: 100%; padding: 6rem 5vw; }
+    .contact-inner { max-width: 640px; }
+    .contact-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300; font-style: italic;
+      color: var(--ink-muted); margin-bottom: 2.5rem; line-height: 1.6;
+    }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--ink);
+      text-decoration: none; border: 0.5px solid var(--border-strong);
+      padding: 10px 20px; border-radius: 2px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid var(--border); padding: 2rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--ink-faint); background: var(--surface);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54JS276X"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav>
+    <a href="#" class="nav-logo">Shaivya V.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO: single column, everything stacked -->
+  <div class="hero">
+    <div class="hero-inner">
+      <p class="hero-label">Product Manager · Builder · Mom</p>
+      <h1 class="hero-name">Shaivya<br/><em>Vashishtha</em></h1>
+      <p class="hero-tagline">
+        Product leader turned independent builder — figuring out what's next,
+        one vibe-coded project at a time.
+      </p>
+      <div class="hero-image-wrap">
+        <img src="hero-image.png" alt="Shaivya — PM, builder, mom" class="hero-image" />
+      </div>
+      <a href="#about" class="hero-cta">Brief intro &#8595;</a>
+      <p class="hero-quote">
+        "Worked across three continents — now building from my little one's play tent."
+      </p>
+      <div class="hero-stats">
+        <div class="stat-cell">
+          <span class="stat-num">10+</span>
+          <span class="stat-label">Years building tech products</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Continents worked</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">AI</span>
+          <span class="stat-label">Learning by building</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">&#9825;</span>
+          <span class="stat-label">Mom to a beautiful little girl</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="timeline-item">
+          <p class="about-chapter">Most recently</p>
+          <p class="about-role">Compliance Product Management</p>
+          <p class="about-co">Goldman Sachs — KYC Experience</p>
+        </div>
+        <div class="timeline-item">
+          <p class="about-chapter">Before that</p>
+          <p class="about-role">Business Card &amp; Member Experience</p>
+          <p class="about-co">Marcus by Goldman Sachs</p>
+        </div>
+        <div class="timeline-item">
+          <p class="about-chapter">Currently</p>
+          <p class="about-role">Independent Builder</p>
+          <p class="about-co">AI-assisted products for real users</p>
+        </div>
+      </div>
+      <div class="about-right">
+        <p class="about-body">
+          I'm a product leader with deep experience across <strong>financial services, compliance, and consumer experience</strong>.
+          At Goldman Sachs I led new application flows and existing member experience for the business credit card at Marcus.
+          Later I moved into Compliance PM, designing the KYC journey, for all GS businesses, that keeps customers
+          safe and regulators happy.
+        </p>
+        <p class="about-body">
+          Before Goldman Sachs, I helped scale an agri-tech startup in India, drove growth strategy at a fintech in Austin,
+          and built sales analytics platforms across the US and India. I hold an MBA in Technical Product Management from
+          the University of Texas at Austin and a B.Tech from IIT Delhi.
+        </p>
+        <p class="about-body">
+          Now I'm a mom to a wonderful little girl, and I'm using my spare time to finally do the thing I always said I'd do someday: <em>build stuff</em>. My current strategy? Build things I want for myself and hope others want them too. So far, the user research sample size is one 😉 — but I'm already plotting how to find my people and turn this into something real 💪
+        </p>
+        <p class="about-body">
+          If you're curious about my work, want to collaborate, or just want to talk product — I'd love to hear from you.
+        </p>
+        <div class="tags">
+          <span class="tag">Product strategy</span>
+          <span class="tag">KYC / Compliance</span>
+          <span class="tag">Consumer finance</span>
+          <span class="tag">AI &amp; LLMs</span>
+          <span class="tag">Vibe coding</span>
+          <span class="tag">0&#8594;1 products</span>
+          <span class="tag">Cross-functional leadership</span>
+          <span class="tag">India · USA · UK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <a href="https://gmailorganiser.streamlit.app/" target="_blank" class="project-card"
+         onclick="dataLayer.push({event:'project_click', project_name:'Gmail Organiser'})">
+        <p class="project-tag">Productivity</p>
+        <h3 class="project-name">Gmail Organiser</h3>
+        <p class="project-desc">A web app built to help you take back control of your inbox — cut through the clutter so you can focus on what actually matters.</p>
+        <div class="project-footer">
+          <span class="project-status"><span class="status-dot"></span> Live</span>
+          <span>&#8594;</span>
+        </div>
+      </a>
+      <a href="#" class="project-card"
+         onclick="dataLayer.push({event:'project_click', project_name:'Second Project'})">
+        <p class="project-tag">TBD</p>
+        <h3 class="project-name">Coming Soon</h3>
+        <p class="project-desc">Something's brewing — watch this space.</p>
+        <div class="project-footer">
+          <span class="project-status"><span class="status-dot"></span> In progress</span>
+          <span>&#8594;</span>
+        </div>
+      </a>
+      <a href="#contact" class="project-card-add">
+        <span class="add-icon">+</span>
+        <span class="add-label">More projects coming soon</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Say hello</h2>
+    </div>
+    <div class="contact-inner">
+      <p class="contact-intro">
+        Open to conversations about product, AI, or whatever rabbit hole I've fallen into this week.
+      </p>
+      <div class="contact-links">
+        <a href="/cdn-cgi/l/email-protection#afdcc7cec6d9d6ced9efdadbcad7cedc81cacbda" class="contact-link">&#9993; Email</a>
+        <a href="https://www.linkedin.com/in/shaivya-vashishtha/" target="_blank" class="contact-link">LinkedIn</a>
+        <a href="https://github.com/newtogit35" target="_blank" class="contact-link">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>&#169; 2025 Shaivya Vashishtha</span>
+    <span>Built with curiosity &amp; 
