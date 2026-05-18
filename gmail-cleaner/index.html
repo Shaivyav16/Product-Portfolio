@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Gmail Cleaner — Shaivya Vashishtha</title>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-54JS276X');</script>
+  <!-- End Google Tag Manager -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1a18;
+      --ink-muted: #6b6b65;
+      --ink-faint: #b0afa8;
+      --surface: #f9f7f3;
+      --surface-card: #ffffff;
+      --border: rgba(26,26,24,0.10);
+      --border-strong: rgba(26,26,24,0.18);
+      --accent: #c9773a;
+      --accent-light: #f4ede3;
+      --tag-bg: #f0ede7;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,247,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-left {
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .nav-back {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.2s;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-divider {
+      width: 1px; height: 18px; background: var(--border-strong);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 400; letter-spacing: 0.02em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* PAGE CONTENT */
+    .page-wrap {
+      padding-top: 56px;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 5rem 5vw 3.5rem;
+      border-bottom: 0.5px solid var(--border);
+      background: var(--surface-card);
+    }
+    .page-header-label {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.01em; color: var(--ink);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 4rem 5vw;
+    }
+    .section-header {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .section-num {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300; color: var(--ink);
+    }
+    .section-body {
+      font-size: 1.05rem; line-height: 1.85; color: var(--ink);
+      max-width: 720px;
+    }
+
+    /* VIDEO */
+    .video-section {
+      padding: 3rem 5vw;
+      background: var(--surface-card);
+    }
+    .video-link {
+      display: block; position: relative; width: 100%; max-width: 900px;
+      text-decoration: none;
+    }
+    .video-thumb {
+      position: relative; width: 100%;
+      padding-bottom: 56.25%; overflow: hidden;
+      border: 0.5px solid var(--border); background: #000;
+    }
+    .video-thumb img {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: opacity 0.2s;
+    }
+    .video-link:hover .video-thumb img { opacity: 0.85; }
+    .video-play {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px; height: 48px;
+      background: #ff0000; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .video-link:hover .video-play { background: #cc0000; transform: translate(-50%, -50%) scale(1.08); }
+    .video-play svg { width: 24px; height: 24px; fill: #fff; margin-left: 4px; }
+    .video-caption {
+      margin-top: 0.6rem;
+      font-size: 12px; color: var(--ink-faint); letter-spacing: 0.04em;
+    }
+
+    /* CTA BUTTON */
+    .cta-section {
+      padding: 2.5rem 5vw;
+      background: var(--surface-card);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--surface-card);
+      text-decoration: none; background: var(--ink);
+      padding: 14px 28px; border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: var(--accent); }
+
+    /* ALTERNATING BACKGROUNDS */
+    .section-light { background: var(--surface); }
+    .section-white { background: var(--surface-card); }
+
+    /* FAQ ACCORDIONS */
+    .faq-list {
+      max-width: 720px;
+      border-top: 0.5px solid var(--border);
+    }
+    .faq-item {
+      border-bottom: 0.5px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem; font-weight: 400; color: var(--ink);
+      text-align: left; line-height: 1.5;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      flex-shrink: 0;
+      font-size: 1.2rem; color: var(--ink-faint);
+      transition: transform 0.25s, color 0.2s;
+      line-height: 1;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+    .faq-answer {
+      display: none;
+      padding-bottom: 1.5rem;
+      font-size: 0.95rem; line-height: 1.85;
+      color: var(--ink-muted);
+    }
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid var(--border);
+      padding: 2rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--ink-faint);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { gap: 1.2rem; }
+      .nav-back span.back-text { display: none; }
+      .video-wrap {
+        padding-bottom: 56.25%;
+      }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54JS276X"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="../index.html#projects" class="nav-back">&#8592; <span class="back-text">Back to projects</span></a>
+      <div class="nav-divider"></div>
+      <a href="../index.html" class="nav-logo">Shaivya V.</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+      <p class="page-header-label">Productivity · Tool</p>
+      <h1 class="page-title">The Gmail Cleaner</h1>
+    </header>
+
+    <!-- VIDEO -->
+    <div class="video-section">
+      <a href="https://www.youtube.com/watch?v=8SuVfBLmevA" target="_blank" rel="noopener noreferrer" class="video-link">
+        <div class="video-thumb">
+          <img src="https://img.youtube.com/vi/8SuVfBLmevA/maxresdefault.jpg" alt="The Gmail Cleaner — watch on YouTube" />
+          <div class="video-play">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+      </a>
+      <p class="video-caption">Watch on YouTube &#8599;</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <a
+        href="https://gmailorganiser.streamlit.app"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-btn"
+        data-gtm-click="gmail-cleaner-app-link"
+      >
+        Try the app &#8599;
+      </a>
+    </div>
+
+    <!-- THE PROBLEM -->
+    <section class="section-light">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">The Problem</h2>
+      </div>
+      <p class="section-body">
+        Your inbox didn't get messy overnight. It got messy one "10% off" signup at a time — until one day you're staring at 15,000 unread emails and Gmail's native unsubscribe button feels like bailing out a sinking ship with a teaspoon.
+      </p>
+    </section>
+
+    <!-- WHAT IT DOES -->
+    <section class="section-white">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">The Solution</h2>
+      </div>
+      <p class="section-body">
+        The Gmail Cleaner finds your Heavy Hitters — the senders responsible for the bulk of your clutter — and lets you wipe their entire history in one shot. Batch delete, block future emails, then revoke access and walk away. What used to take an afternoon takes minutes.
+      </p>
+    </section>
+
+    <!-- HOW I BUILT IT -->
+    <section class="section-light">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">How I Built It</h2>
+      </div>
+      <p class="section-body">
+        I built this as a focused, single-purpose tool: fast to use, nothing stored, nothing lingering. I chose Streamlit to keep the UI lightweight and shippable quickly — the right tool for a utility that needed to just work. For ranking senders by volume, I used a Count-Min Sketch, a probabilistic data structure that trades a small margin of error for significant speed gains. For a cleanup tool, a close estimate is exactly what you need — you don't need perfect math to know who your top spammer is.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-white">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">FAQ</h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Is this app secure? What's the "Unverified App" warning about?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Security was the first design decision, not an afterthought. Because this is a custom tool rather than a mass-market product, Google flags it as "unverified" — but here's what that actually means in practice: your emails are never stored, your data never touches a third-party database, and the app acts as a direct bridge to the Gmail API only for the duration of your session. When you're done, hit Revoke Access and the connection is completely severed.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How accurate is the Heavy Hitters ranking?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Very close, but intentionally not perfect. The Count-Min Sketch approach prioritises speed — scanning thousands of email headers in seconds rather than minutes. The ranking might shift slightly during a live scan, but it will always surface the senders responsible for the bulk of your clutter. That's all you need to make the call.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What do Delete, Block, and Ignore actually do — and what's the best way to use them?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p style="margin-bottom: 0.75rem;"><strong style="font-weight: 500;">Delete</strong> moves all emails from that sender to your Gmail Trash. They're not gone yet — you have 30 days to review or undo from your Trash folder.</p>
+            <p style="margin-bottom: 0.75rem;"><strong style="font-weight: 500;">Block</strong> creates a Gmail Filter in your actual Gmail settings, routing future emails from that sender straight to Trash. You can edit or remove these filters anytime inside Gmail.</p>
+            <p style="margin-bottom: 0.75rem;"><strong style="font-weight: 500;">Ignore</strong> is your whitelist. If your top Heavy Hitter is someone you actually want to keep — say, a family member you exchange a lot of email with — you can ignore them to remove them from the list for that session, so you can focus on the senders you actually want to act on. Ignored senders appear in a separate table below the Heavy Hitters list so you always have visibility. Changed your mind? You can add them back at any time.</p>
+            <p style="margin-bottom: 0.75rem;"><strong style="font-weight: 500;">Reset Data</strong> clears the current scan so you can start fresh — useful if your session feels stale or you want to re-scan after taking action.</p>
+            <p>For best results: scan your inbox → ignore anyone you want to keep → identify your top offenders → delete their history → block the ones you never want to hear from again → revoke access. Spring cleaning, done.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /page-wrap -->
+
+  <!-- FOOTER -->
+  <footer>
+    <span>&#169; 2025 Shaivya Vashishtha</span>
+    <span>Built with curiosity &amp; Claude</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i) {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
