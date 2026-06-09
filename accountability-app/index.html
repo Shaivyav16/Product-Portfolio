@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accountability App — Shaivya Vashishtha</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6N4P9S0380"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6N4P9S0380');
+  </script>
+  <!-- End Google tag -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1a18;
+      --ink-muted: #6b6b65;
+      --ink-faint: #b0afa8;
+      --surface: #f9f7f3;
+      --surface-card: #ffffff;
+      --border: rgba(26,26,24,0.10);
+      --border-strong: rgba(26,26,24,0.18);
+      --accent: #c9773a;
+      --accent-light: #f4ede3;
+      --tag-bg: #f0ede7;
+      --success: #2d6a4f;
+      --success-bg: #e8f5ee;
+      --info: #1d4e89;
+      --info-bg: #e8f0fa;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,247,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-left { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-back {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.2s;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-divider { width: 1px; height: 18px; background: var(--border-strong); }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 400; letter-spacing: 0.02em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* PAGE */
+    .page-wrap { padding-top: 56px; }
+
+    .page-header {
+      padding: 5rem 5vw 3.5rem;
+      border-bottom: 0.5px solid var(--border);
+      background: var(--surface-card);
+    }
+    .page-header-label {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.01em; color: var(--ink);
+    }
+    .page-subtitle {
+      margin-top: 1rem;
+      font-size: 1rem; color: var(--ink-muted);
+      max-width: 600px; line-height: 1.7;
+    }
+
+    /* SECTIONS */
+    section { padding: 4rem 5vw; }
+    .section-header {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .section-num {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300; color: var(--ink);
+    }
+    .section-body {
+      font-size: 1.05rem; line-height: 1.85; color: var(--ink);
+      max-width: 720px;
+    }
+    .section-body + .section-body { margin-top: 1rem; }
+
+    .section-light { background: var(--surface); }
+    .section-white { background: var(--surface-card); }
+
+    /* VIDEO */
+    .video-section {
+      padding: 3rem 5vw;
+      background: var(--surface-card);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .video-layout { display: flex; gap: 2.5rem; align-items: flex-start; max-width: 720px; }
+    .video-text { flex: 1; }
+    .video-label {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-faint); font-weight: 500; margin-bottom: 0.5rem; display: block;
+    }
+    .video-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300; color: var(--ink);
+      margin-bottom: 0.6rem; line-height: 1.25;
+    }
+    .video-desc { font-size: 0.9rem; color: var(--ink-muted); line-height: 1.7; }
+    .video-frame {
+      position: relative; flex-shrink: 0;
+      width: 220px; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(26,26,24,0.14);
+      background: #000;
+    }
+    .video-frame::before { content: ''; display: block; padding-top: 177.78%; }
+    .video-frame iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: none;
+    }
+    @media (max-width: 600px) {
+      .video-layout { flex-direction: column; }
+      .video-frame { width: 100%; max-width: 260px; margin: 0 auto; }
+    }
+
+    /* TLDR BOX */
+    .tldr-box {
+      background: var(--surface-card);
+      border: 0.5px solid var(--border-strong);
+      padding: 2rem 2.5rem;
+      max-width: 720px;
+    }
+    .tldr-badge {
+      display: inline-block; background: var(--accent); color: #fff;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 3px 12px;
+      margin-bottom: 1rem;
+    }
+    .tldr-note {
+      font-size: 0.85rem; color: var(--ink-muted);
+      font-style: italic; margin-bottom: 1.25rem;
+    }
+
+    /* PROMPT BLOCK */
+    .prompt-block {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.9rem; color: var(--ink-muted);
+      font-style: italic; line-height: 1.7;
+    }
+
+    /* CALLOUT */
+    .callout {
+      background: var(--accent-light);
+      border: 0.5px solid rgba(201,119,58,0.3);
+      padding: 0.85rem 1.25rem;
+      font-size: 0.9rem; color: var(--ink-muted);
+      margin: 1rem 0; line-height: 1.65;
+    }
+
+    /* LIMITS */
+    .limit-item {
+      padding: 0.75rem 0;
+      border-bottom: 0.5px solid var(--border);
+      font-size: 0.9rem; color: var(--ink-muted);
+      line-height: 1.65; max-width: 720px;
+    }
+    .limit-item:last-child { border-bottom: none; }
+    .limit-item strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
+
+    /* STEPS (numbered upload steps) */
+    .steps { list-style: none; padding: 0; counter-reset: step; max-width: 720px; }
+    .steps li {
+      counter-increment: step;
+      display: flex; gap: 12px; margin-bottom: 0.75rem;
+      align-items: flex-start; font-size: 0.9rem; color: var(--ink-muted); line-height: 1.65;
+    }
+    .steps li::before {
+      content: counter(step);
+      min-width: 22px; height: 22px; border-radius: 50%;
+      background: var(--ink); color: var(--surface);
+      font-size: 10px; font-weight: 500;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .steps a { color: var(--accent); text-decoration: none; }
+    .steps a:hover { text-decoration: underline; }
+
+    /* BUILD STEPS */
+    .build-steps { list-style: none; padding: 0; max-width: 720px; }
+    .build-step { display: flex; gap: 16px; margin-bottom: 1.5rem; align-items: flex-start; }
+    .build-step-num {
+      min-width: 28px; height: 28px;
+      border: 0.5px solid var(--border-strong);
+      color: var(--ink-muted); font-size: 11px; font-weight: 500;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .build-step-body { flex: 1; }
+    .build-step-title { font-size: 0.95rem; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+    .build-step-desc { font-size: 0.9rem; color: var(--ink-muted); line-height: 1.7; }
+    .build-step-desc em { font-style: italic; }
+    .build-step-desc strong { color: var(--ink); font-weight: 500; }
+
+    /* COSTS TABLE */
+    .costs-table-wrap {
+      overflow-x: auto;
+      border: 0.5px solid var(--border-strong);
+      max-width: 720px;
+    }
+    .costs-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .costs-table thead th {
+      text-align: left; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-muted); padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-strong);
+      background: var(--surface);
+    }
+    .costs-table tbody td {
+      padding: 10px 14px; border-bottom: 0.5px solid var(--border);
+      color: var(--ink-muted); vertical-align: top; line-height: 1.55;
+    }
+    .costs-table tbody tr:last-child td { border-bottom: none; }
+    .costs-table strong { color: var(--ink); font-weight: 500; }
+    .costs-table em { font-style: italic; font-size: 0.8rem; }
+    .req-yes { color: var(--success); font-weight: 500; font-size: 0.8rem; }
+    .req-rec { color: var(--info); font-weight: 500; font-size: 0.8rem; }
+    .req-opt { color: var(--ink-faint); font-size: 0.8rem; }
+
+    /* COMPARE TABLE */
+    .compare-table-wrap {
+      overflow-x: auto;
+      border: 0.5px solid var(--border-strong);
+      max-width: 720px; margin-top: 1.5rem;
+    }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .compare-table thead th {
+      padding: 10px 14px; text-align: left;
+      font-size: 0.8rem; font-weight: 500;
+      border-bottom: 0.5px solid var(--border-strong);
+    }
+    .compare-table thead th:first-child { color: var(--ink-faint); font-size: 0.75rem; font-weight: 400; }
+    .compare-table thead .th-simple { background: var(--info-bg); color: var(--info); }
+    .compare-table thead .th-full { background: var(--success-bg); color: var(--success); }
+    .compare-table tbody td {
+      padding: 9px 14px; border-bottom: 0.5px solid var(--border);
+      color: var(--ink-muted); vertical-align: top; line-height: 1.55; font-size: 0.85rem;
+    }
+    .compare-table tbody td:first-child { color: var(--ink-faint); font-size: 0.8rem; font-weight: 500; white-space: nowrap; }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+
+    /* DIVIDER */
+    hr.divider { border: none; border-top: 0.5px solid var(--border); margin: 1.5rem 0; }
+
+    /* SUB / DOC HEADINGS inside body */
+    .sub-title { font-size: 1rem; font-weight: 500; color: var(--ink); margin: 1.75rem 0 0.5rem; }
+    .doc-title { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin: 1.1rem 0 0.3rem; }
+    .body-p { font-size: 0.95rem; color: var(--ink-muted); line-height: 1.8; margin-bottom: 0.75rem; max-width: 720px; }
+    .body-p strong { color: var(--ink); font-weight: 500; }
+    .body-ul { padding-left: 1.1rem; margin-bottom: 0.75rem; max-width: 720px; }
+    .body-ul li { font-size: 0.875rem; color: var(--ink-muted); margin-bottom: 0.3rem; line-height: 1.65; }
+    .body-ul li strong { color: var(--ink); font-weight: 500; }
+
+    /* ESSAY / DARK SECTION */
+    .essay-section {
+      background: var(--ink);
+      padding: 5rem 5vw;
+    }
+    .essay-section .section-title { color: var(--surface); }
+    .essay-section .section-num { color: var(--accent); }
+    .essay-section .section-header { border-bottom-color: rgba(249,247,243,0.12); }
+    .essay-section .section-body { color: rgba(249,247,243,0.65); }
+    .essay-section .section-body + .section-body { margin-top: 1rem; }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid var(--border);
+      padding: 2rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; color: var(--ink-faint);
+    }
+
+    /* FAQ */
+    .faq-list { max-width: 720px; border-top: 0.5px solid var(--border); }
+    .faq-item { border-bottom: 0.5px solid var(--border); }
+    .faq-question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.25rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem; font-weight: 400; color: var(--ink);
+      text-align: left; line-height: 1.5; transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { flex-shrink: 0; font-size: 1.2rem; color: var(--ink-faint); transition: transform 0.25s, color 0.2s; line-height: 1; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--accent); }
+    .faq-answer { display: none; padding-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.85; color: var(--ink-muted); }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { gap: 1.2rem; }
+      .nav-back span.back-text { display: none; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="../index.html#projects" class="nav-back">&#8592; <span class="back-text">Back to projects</span></a>
+      <div class="nav-divider"></div>
+      <a href="../index.html" class="nav-logo">Shaivya V.</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+      <p class="page-header-label">Productivity · Tool</p>
+      <h1 class="page-title">Accountability App</h1>
+      <p class="page-subtitle">A starting point, not a spec. I built this to keep myself honest about a hard career pivot, a baby, a body, and a move across the Atlantic. People asked how. This is how.</p>
+    </header>
+
+    <!-- VIDEO -->
+    <div class="video-section">
+      <div class="video-layout">
+        <div class="video-text">
+          <span class="video-label">Watch first</span>
+          <h2 class="video-heading">See the app in action</h2>
+          <p class="video-desc">Before you build anything, watch this short walkthrough of the app I use daily — what it does, how it feels, and why the savage feedback mode is the whole point.</p>
+        </div>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/XVhHlBUCaEY" title="Accountability App Walkthrough" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 01 — SIMPLE PATH -->
+    <section class="section-light">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">The simple path</h2>
+      </div>
+
+      <div class="tldr-box">
+        <div class="tldr-badge">⚡ TLDR — Simple path</div>
+        <p class="tldr-note">Read this if you want to try the concept before committing to the full build. No code, no hosting, no developer accounts.</p>
+
+        <p class="sub-title" style="margin-top:0;">Minimum subscription needed</p>
+        <p class="body-p"><strong>Claude Pro (~£17–18/month).</strong> That's it. You do not need Claude Code — that's a separate developer tool for the full build. The simple version is built entirely inside Claude's chat interface using a feature called <strong>Projects</strong>, which lets you upload documents Claude remembers across every conversation. No API key, no Vercel, no GitHub.</p>
+        <p class="body-p">Free tier is not enough — it can't reliably run interactive AI-powered artifacts or store data across sessions. Pro is the minimum.</p>
+
+        <hr class="divider" />
+
+        <p class="sub-title">Documents to prepare before you prompt</p>
+        <p class="body-p" style="font-size:0.85rem;">Write these before you open Claude. The quality of your prep is the quality of your app.</p>
+
+        <p class="doc-title">Document 1 — About Me <span style="font-weight:400;color:var(--ink-muted);">(most important)</span></p>
+        <ul class="body-ul">
+          <li>The roles you play and what each demands of you</li>
+          <li>Your goals across each area — specific, not aspirational</li>
+          <li>Your daily structure: wake time, productive window, fixed commitments</li>
+          <li>Your professional background — 2–3 paragraphs on what you've actually done</li>
+          <li>The tone you want when you fail. The AI is only as honest as you license it to be.</li>
+        </ul>
+
+        <p class="doc-title">Document 2 — App Spec <span style="font-weight:400;color:var(--ink-muted);">(what you're building)</span></p>
+        <ul class="body-ul">
+          <li>The tabs you want (e.g. Today, Hourly Check-in, Weekly Review, Goals)</li>
+          <li>The hours your day runs (e.g. 6am–10pm)</li>
+          <li>Scoring weights per life area — must add up to 100%</li>
+          <li>What the AI verdict must contain — specify exactly: what happened, where you lied to yourself, the one thing that changes everything</li>
+          <li>Non-negotiables about tone, structure, or timing</li>
+        </ul>
+
+        <hr class="divider" />
+
+        <p class="sub-title">Where to upload the documents</p>
+        <ol class="steps">
+          <li>Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> and sign in with your Pro account.</li>
+          <li>In the left sidebar, create a <strong>New Project</strong> — name it something like "My Accountability App".</li>
+          <li>Inside the Project, open <strong>Project Knowledge</strong> and upload both documents.</li>
+          <li>Claude now has access to them in every conversation in that Project. No need to paste again.</li>
+        </ol>
+
+        <hr class="divider" />
+
+        <p class="sub-title">What is the prompt?</p>
+        <p class="body-p" style="font-size:0.875rem;">Start a new conversation inside the Project and send something like this — edit the bracketed parts:</p>
+        <div class="prompt-block">"Using the About Me and App Spec documents in this project, build me a single interactive artifact that works as my personal accountability app. It should have tabs for [list your tabs]. It should run hourly check-ins from [start hour] to [end hour]. Scoring weights are [your weights]. The AI verdict tone should be [your tone]. All my entries must persist in artifact storage so they're there when I come back — test this works before you consider it done. I will be using this on my phone browser, so it must be fully mobile-friendly."</div>
+        <p class="body-p" style="font-size:0.875rem;">After Claude builds the first version: click every tab, make a test entry, close the tab entirely, come back and check the entry is still there. If it isn't: <em>"My entry from earlier isn't showing. Fix the persistence so data survives a tab close."</em></p>
+
+        <hr class="divider" />
+
+        <p class="sub-title">Limitations of the simple build</p>
+        <div class="limit-item"><strong>Phone works, but it's a browser tab — not an installed app.</strong> No home screen icon, no offline access, no reminders.</div>
+        <div class="limit-item"><strong>One device, one browser, one conversation.</strong> Entries don't sync across devices. Pick one, stay on it, bookmark the exact conversation.</div>
+        <div class="limit-item"><strong>You're renting, not owning.</strong> Data lives inside Claude's infrastructure. If you clear browser data or lose account access, entries may not survive. Ask Claude to add an Export button.</div>
+        <div class="limit-item"><strong>The UI adapts to mobile, but it's never truly full-screen.</strong> The artifact always renders inside the Claude chat interface. It will always feel like something living inside a chat, not a standalone app.</div>
+        <div class="limit-item"><strong>No push notifications.</strong> You'll need a separate alarm until you've built the habit.</div>
+        <div class="limit-item" style="border-bottom:none;"><strong>Requires an active Claude Pro subscription.</strong> If you cancel, the app stops working.</div>
+        <div class="callout" style="margin-top:1.25rem;">If these limitations matter to you, the full build below solves all of them. The build itself is straightforward — it's the testing and iterating that takes time, not the setup.</div>
+      </div>
+    </section>
+
+    <!-- SECTION 02 — FULL BUILD -->
+    <section class="section-white">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">The full build</h2>
+      </div>
+      <p class="section-body">This is what I actually run. It's an installed app on my iPhone home screen, my data sits on my own device, and an AI writes my verdicts via a direct API connection.</p>
+      <p class="section-body">The setup is genuinely not complicated — Claude Code does most of the heavy lifting and you don't need to know how to code. What takes time is testing: finding edge cases, making sure data persists exactly as expected, and iterating until the app behaves the way your life needs it to. Budget for that, not for the build itself.</p>
+
+      <p class="sub-title" style="margin-top:2.5rem;">What you need — accounts and costs</p>
+      <div class="costs-table-wrap" style="margin-top:1rem;">
+        <table class="costs-table">
+          <thead>
+            <tr><th>Tool</th><th>What it's for</th><th>Cost</th><th>Required?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Claude Pro</strong></td><td>Powers Claude Code, which writes the app for you in plain English from your terminal</td><td>~£17–18/mo</td><td><span class="req-yes">Yes</span></td></tr>
+            <tr><td><strong>Anthropic API key</strong></td><td>Powers live AI verdicts inside the running app — separate from your subscription, pay-per-use. <em>Set a hard spending cap immediately.</em></td><td>A few £/mo</td><td><span class="req-yes">Yes</span></td></tr>
+            <tr><td><strong>Vercel</strong> <em>(or equivalent)</em></td><td>Hosts the app at a real URL and runs a secure function so your API key is never exposed</td><td>Free tier</td><td><span class="req-yes">Yes</span></td></tr>
+            <tr><td><strong>GitHub</strong> <em>(or equivalent)</em></td><td>Stores your code and connects to Vercel for one-command deploys</td><td>Free</td><td><span class="req-rec">Recommended</span></td></tr>
+            <tr><td><strong>A laptop</strong></td><td>To run Claude Code and deploy — I used a MacBook Air</td><td>You have one</td><td><span class="req-yes">Yes</span></td></tr>
+            <tr><td><strong>Google Calendar</strong></td><td>So the app can read your real schedule and factor time use into the verdict</td><td>Free</td><td><span class="req-opt">Optional — add last</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="body-p" style="margin-top:0.75rem;font-size:0.85rem;">Total realistic monthly cost: your Claude subscription plus a few pounds of API usage. Hosting is free at this scale.</p>
+
+      <p class="sub-title" style="margin-top:2.5rem;">The build sequence — in order</p>
+      <p class="body-p" style="font-size:0.875rem;margin-bottom:1.25rem;">Before writing any code, prep the same two documents from above (About Me + App Spec). The more precise the spec, the less rebuilding you do later.</p>
+      <ul class="build-steps">
+        <li class="build-step">
+          <div class="build-step-num">1</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Set up all accounts in one sitting.</div>
+            <div class="build-step-desc">Create your Anthropic API key, Vercel account, and GitHub repository before anything else. The moment you have an API key, <strong>set a monthly spending cap</strong> — a bug in a loop can make thousands of API calls and you don't want to find out on your credit card statement.</div>
+          </div>
+        </li>
+        <li class="build-step">
+          <div class="build-step-num">2</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Have Claude Code scaffold the app.</div>
+            <div class="build-step-desc">Open Claude Code in your terminal, hand it your spec, and let it build the first version locally. Run it in your browser, click every tab, enter test data. It will look rough. That's correct — you're starting, not finishing.</div>
+          </div>
+        </li>
+        <li class="build-step">
+          <div class="build-step-num">3</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Wire the AI features through a secure middle layer.</div>
+            <div class="build-step-desc">Your API key must never live inside the app code. The right pattern: a serverless function on Vercel holds the key, and the app calls that instead of the API directly. Ask Claude Code explicitly: <em>"Proxy the AI API calls through a Vercel serverless function so the key is never exposed in the client."</em></div>
+          </div>
+        </li>
+        <li class="build-step">
+          <div class="build-step-num">4</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Build the Export button before anything else feels finished.</div>
+            <div class="build-step-desc">Your data lives in browser storage on your device (IndexedDB). If you ever clear Safari's cache or get a new phone without exporting first, the data is gone. Build the Export button on day one, not when it's too late.</div>
+          </div>
+        </li>
+        <li class="build-step">
+          <div class="build-step-num">5</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Test persistence properly, not optimistically.</div>
+            <div class="build-step-desc">Make several entries across tabs. Close everything. Come back the next day. Still there? Clear the cache on desktop and hard-refresh — still there? Test on your phone too. This is where you should expect to spend the most time.</div>
+          </div>
+        </li>
+        <li class="build-step">
+          <div class="build-step-num">6</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Deploy and install it on your phone.</div>
+            <div class="build-step-desc">Push to Vercel. Open the URL on your phone. Use "Add to Home Screen" — a well-built web app installs and behaves almost exactly like a native one. This is the moment the project becomes a tool.</div>
+          </div>
+        </li>
+        <li class="build-step">
+          <div class="build-step-num">7</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Establish a deploy ritual and write it down.</div>
+            <div class="build-step-desc">Every time you update the app: build fresh → deploy with a force flag → hard-refresh on desktop → clear site cache on phone. Most "why isn't it updating?" confusion is a caching issue, not a real bug.</div>
+          </div>
+        </li>
+        <li class="build-step">
+          <div class="build-step-num">8</div>
+          <div class="build-step-body">
+            <div class="build-step-title">Connect your calendar last, as a bonus.</div>
+            <div class="build-step-desc">Once the core loop works reliably, connecting Google Calendar lets the app see your real schedule and factor your actual time use into the verdict. The app is fully useful without it.</div>
+          </div>
+        </li>
+      </ul>
+
+      <p class="sub-title" style="margin-top:2rem;">Honest limitations of the full build</p>
+      <div class="limit-item"><strong>Your data lives on one device.</strong> It doesn't sync automatically. Export regularly — if you lose entries because you didn't, that's on you, not the app.</div>
+      <div class="limit-item"><strong>Some platform features are flaky.</strong> Reliable push notifications on iOS can be inconsistent. A plain alarm works fine as a workaround.</div>
+      <div class="limit-item" style="border-bottom:none;"><strong>You own it, which means you maintain it.</strong> No one pushes updates to this but you. That's the price of owning your data outright.</div>
+    </section>
+
+    <!-- SECTION 03 — COMPARE -->
+    <section class="section-light">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Simple vs. full build</h2>
+      </div>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="th-simple">Simple (Claude artifact)</th>
+              <th class="th-full">Full (Deployed PWA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>What it is</td><td>An interactive AI artifact inside Claude</td><td>A real installed app on your phone</td></tr>
+            <tr><td>Data lives</td><td>Claude's infrastructure</td><td>Your own device</td></tr>
+            <tr><td>On phone</td><td>Yes — browser tab inside Claude's chat, never full-screen</td><td>Yes — home screen, full-screen, native-feeling</td></tr>
+            <tr><td>Cross-device</td><td>No — one device, one bookmarked conversation</td><td>Yes — install on any device</td></tr>
+            <tr><td>You own the data</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Push notifications</td><td>No</td><td>Partial — depends on OS and browser</td></tr>
+            <tr><td>Monthly cost</td><td>Claude Pro (£17–18/mo)</td><td>Claude Pro + API key (a few £/mo extra)</td></tr>
+            <tr><td>Setup effort</td><td>~1 hour</td><td>Straightforward — allow time for testing</td></tr>
+            <tr><td>Best for</td><td>"I want to test this idea first"</td><td>"I want this permanently, and I want to own it"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-white">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">FAQ</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do I need to know how to code?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            No. Claude Code writes the code for you in plain English from your terminal. What you need is a clear spec of what you want — the more specific, the less back-and-forth. The obstacle is prep, not programming.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Why not just use an existing habit tracker?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Because no existing tracker knows your goals, your life structure, your tone preference, or what a meaningful verdict looks like for you. Every generic app defaults to encouragement. This one says what you need to hear. The specificity is the point.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Is my data private?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            In the full build: yes. Your entries live in browser storage on your own device (IndexedDB). The only data that leaves your device is what you explicitly send to the AI for verdicts — and that's processed via the Anthropic API under their standard privacy terms, not stored by the app. In the simple build, entries live in Claude's infrastructure for the duration of your conversation.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-wrap -->
+
+  <!-- DARK ESSAY SECTION -->
+  <section class="essay-section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">The part most people skip</h2>
+    </div>
+    <p class="section-body">The hard part of this was never the build. Claude Code did the heavy lifting and the setup is not the obstacle.</p>
+    <p class="section-body">The hard part is the one-pager. Writing down, honestly, what you are actually trying to do with your life and exactly how harshly you want to be told when you are not doing it. The app is just a mirror. A mirror is only worth building if you are willing to look.</p>
+    <p class="section-body">If you soften the tone because the savage version stings — you have built a more comfortable way to lie to yourself, and you would have been better off with nothing. Decide that before you start, not after.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>&#169; 2025 Shaivya Vashishtha</span>
+    <span>Built with curiosity &amp; Claude</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i) {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
