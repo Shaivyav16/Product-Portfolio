@@ -362,7 +362,8 @@
     <header class="page-header">
       <p class="page-header-label">Productivity · Tool</p>
       <h1 class="page-title">Accountability App</h1>
-      <p class="page-subtitle">A starting point, not a spec. I built this to keep myself honest about a hard career pivot, a baby, a body, and a move across the Atlantic. People asked how. This is how.</p>
+      <p class="page-subtitle"><em>A guide, not a blueprint. Adapt it to your life.</em></p>
+      <p class="page-subtitle">I built this to keep myself honest about a hard career pivot, rebuilding strength post-pregnancy, and a move across the Atlantic. Here's how I did it.</p>
     </header>
 
     <!-- VIDEO -->
@@ -490,7 +491,7 @@
           <div class="build-step-num">3</div>
           <div class="build-step-body">
             <div class="build-step-title">Wire the AI features through a secure middle layer.</div>
-            <div class="build-step-desc">Your API key must never live inside the app code. The right pattern: a serverless function on Vercel holds the key, and the app calls that instead of the API directly. Ask Claude Code explicitly: <em>"Proxy the AI API calls through a Vercel serverless function so the key is never exposed in the client."</em></div>
+            <div class="build-step-desc">Ask Claude Code to handle this security step for you. Tell it: <em>"Make sure my API key is never exposed in the client code."</em> It will set up the secure layer automatically.</div>
           </div>
         </li>
         <li class="build-step">
@@ -511,14 +512,14 @@
           <div class="build-step-num">6</div>
           <div class="build-step-body">
             <div class="build-step-title">Deploy and install it on your phone.</div>
-            <div class="build-step-desc">Push to Vercel. Open the URL on your phone. Use "Add to Home Screen" — a well-built web app installs and behaves almost exactly like a native one. This is the moment the project becomes a tool.</div>
+            <div class="build-step-desc">Claude Code handles the deployment for you — once the build is done, it will give you a live URL. Open that URL on your phone, tap the share icon, and select "Add to Home Screen." This is the moment the project becomes a tool.</div>
           </div>
         </li>
         <li class="build-step">
           <div class="build-step-num">7</div>
           <div class="build-step-body">
             <div class="build-step-title">Establish a deploy ritual and write it down.</div>
-            <div class="build-step-desc">Every time you update the app: build fresh → deploy with a force flag → hard-refresh on desktop → clear site cache on phone. Most "why isn't it updating?" confusion is a caching issue, not a real bug.</div>
+            <div class="build-step-desc">After any update to the app, your phone or desktop may keep showing the old version. This is a caching issue, not a real bug. The fix: hard-refresh on desktop (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows) and clear the site cache on your phone. Claude Code handles the deployment side — this is the only part you need to do yourself.</div>
           </div>
         </li>
         <li class="build-step">
