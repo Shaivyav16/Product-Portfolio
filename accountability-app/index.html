@@ -198,8 +198,7 @@
       line-height: 1.65; max-width: 720px;
     }
     .limit-item:last-child { border-bottom: none; }
-    .limit-item strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
-    .steps li strong, .steps li a, .build-step-desc strong, .body-p strong, .body-ul li strong { display: inline; }
+    .limit-title { display: block; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
 
     /* STEPS (numbered upload steps) */
     .steps { list-style: none; padding: 0; counter-reset: step; max-width: 720px; }
@@ -433,12 +432,12 @@
         <hr class="divider" />
 
         <p class="sub-title">Limitations of the simple build</p>
-        <div class="limit-item"><strong>Phone works, but it's a browser tab — not an installed app.</strong> No home screen icon, no offline access, no reminders.</div>
-        <div class="limit-item"><strong>One device, one browser, one conversation.</strong> Entries don't sync across devices. Pick one, stay on it, bookmark the exact conversation.</div>
-        <div class="limit-item"><strong>You're renting, not owning.</strong> Data lives inside Claude's infrastructure. If you clear browser data or lose account access, entries may not survive. Ask Claude to add an Export button.</div>
-        <div class="limit-item"><strong>The UI adapts to mobile, but it's never truly full-screen.</strong> The artifact always renders inside the Claude chat interface. It will always feel like something living inside a chat, not a standalone app.</div>
-        <div class="limit-item"><strong>No push notifications.</strong> You'll need a separate alarm until you've built the habit.</div>
-        <div class="limit-item" style="border-bottom:none;"><strong>Requires an active Claude Pro subscription.</strong> If you cancel, the app stops working.</div>
+        <div class="limit-item"><span class="limit-title">Phone works, but it's a browser tab — not an installed app.</span> No home screen icon, no offline access, no reminders.</div>
+        <div class="limit-item"><span class="limit-title">One device, one browser, one conversation.</span> Entries don't sync across devices. Pick one, stay on it, bookmark the exact conversation.</div>
+        <div class="limit-item"><span class="limit-title">You're renting, not owning.</span> Data lives inside Claude's infrastructure. If you clear browser data or lose account access, entries may not survive. Ask Claude to add an Export button.</div>
+        <div class="limit-item"><span class="limit-title">The UI adapts to mobile, but it's never truly full-screen.</span> The artifact always renders inside the Claude chat interface. It will always feel like something living inside a chat, not a standalone app.</div>
+        <div class="limit-item"><span class="limit-title">No push notifications.</span> You'll need a separate alarm until you've built the habit.</div>
+        <div class="limit-item" style="border-bottom:none;"><span class="limit-title">Requires an active Claude Pro subscription.</span> If you cancel, the app stops working.</div>
         <div class="callout" style="margin-top:1.25rem;">If these limitations matter to you, the full build below solves all of them. The build itself is straightforward — it's the testing and iterating that takes time, not the setup.</div>
       </div>
     </section>
@@ -532,9 +531,9 @@
       </ul>
 
       <p class="sub-title" style="margin-top:2rem;">Honest limitations of the full build</p>
-      <div class="limit-item"><strong>Your data lives on one device.</strong> It doesn't sync automatically. Export regularly — if you lose entries because you didn't, that's on you, not the app.</div>
-      <div class="limit-item"><strong>Some platform features are flaky.</strong> Reliable push notifications on iOS can be inconsistent. A plain alarm works fine as a workaround.</div>
-      <div class="limit-item" style="border-bottom:none;"><strong>You own it, which means you maintain it.</strong> No one pushes updates to this but you. That's the price of owning your data outright.</div>
+      <div class="limit-item"><span class="limit-title">Your data lives on one device.</span> It doesn't sync automatically. Export regularly — if you lose entries because you didn't, that's on you, not the app.</div>
+      <div class="limit-item"><span class="limit-title">Some platform features are flaky.</span> Reliable push notifications on iOS can be inconsistent. A plain alarm works fine as a workaround.</div>
+      <div class="limit-item" style="border-bottom:none;"><span class="limit-title">You own it, which means you maintain it.</span> No one pushes updates to this but you. That's the price of owning your data outright.</div>
     </section>
 
     <!-- SECTION 03 — COMPARE -->
@@ -605,17 +604,6 @@
     </section>
 
   </div><!-- /page-wrap -->
-
-  <!-- DARK ESSAY SECTION -->
-  <section class="essay-section">
-    <div class="section-header">
-      <span class="section-num">05</span>
-      <h2 class="section-title">The part most people skip</h2>
-    </div>
-    <p class="section-body">The hard part of this was never the build. Claude Code did the heavy lifting and the setup is not the obstacle.</p>
-    <p class="section-body">The hard part is the one-pager. Writing down, honestly, what you are actually trying to do with your life and exactly how harshly you want to be told when you are not doing it. The app is just a mirror. A mirror is only worth building if you are willing to look.</p>
-    <p class="section-body">If you soften the tone because the savage version stings — you have built a more comfortable way to lie to yourself, and you would have been better off with nothing. Decide that before you start, not after.</p>
-  </section>
 
   <!-- FOOTER -->
   <footer>
